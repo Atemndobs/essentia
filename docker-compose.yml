@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+    essentia:
+        #image: mtgupf/essentia
+        build:
+            context: .
+        container_name: essentia
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./data:/app/data
+        healthcheck:
+            test: [ "CMD", "curl", "-f", "http://localhost:5000/" ]
+            interval: 5m
+            timeout: 3s
+            retries: 3
+networks:
+    default:
+        external:
+            name: laravel_sail
